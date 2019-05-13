@@ -154,7 +154,7 @@ module Grack
       # Sanitize the URI:
       # * Unescape escaped characters
       # * Replace runs of / with a single /
-      path_info = Rack::Utils.unescape(request.path_info).gsub(%r{/+}, '/')
+      path_info = Rack::Utils.unescape(request.path_info.gsub('+','%2b')).gsub(%r{/+}, '/')
 
       ROUTES.each do |path_matcher, verb, handler|
         path_info.match(path_matcher) do |match|
